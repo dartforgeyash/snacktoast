@@ -2,7 +2,7 @@ name: snacktoast
 description: "A production-ready Flutter package for customizable Toast messages
   and Snackbars with queue management, theming, and zero-dependency design."
 version: 0.0.1
-homepage:
+repository: https://github.com/dartforgeyash/snacktoast
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
