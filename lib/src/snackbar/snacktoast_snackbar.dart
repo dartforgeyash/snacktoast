@@ -3,7 +3,9 @@ import '../core/snacktoast_config.dart';
 import '../core/snacktoast_style.dart';
 import '../core/snacktoast_type.dart';
 
+/// Parameters for configuring a snackbar notification.
 class SnackbarParams {
+  /// Creates a set of parameters for a snackbar.
   const SnackbarParams({
     required this.message,
     required this.type,
@@ -26,36 +28,76 @@ class SnackbarParams {
     this.fixedWidthOverride,
   });
 
+  /// The main message text.
   final String message;
+
+  /// Optional title text.
   final String? title;
+
+  /// The semantic type of the snackbar.
   final SnackToastType type;
+
+  /// The global configuration to fallback to.
   final SnackToastConfig config;
+
+  /// How long the snackbar should be displayed.
   final Duration? duration;
+
+  /// An optional action button.
   final SnackBarAction? action;
+
+  /// Optional background color override.
   final Color? backgroundColor;
+
+  /// Optional foreground (text/icon) color override.
   final Color? foregroundColor;
+
+  /// The display behavior (floating or fixed).
   final SnackBarBehavior behavior;
+
+  /// Optional visual style override.
   final SnackToastVisualStyle? visualStyleOverride;
+
+  /// Optional title color override.
   final Color? titleColor;
+
+  /// Optional title text style override.
   final TextStyle? titleStyleOverride;
+
+  /// Optional message color override.
   final Color? messageColorOverride;
+
+  /// Optional message text style override.
   final TextStyle? messageStyleOverride;
+
+  /// Optional minimum width override.
   final double? minWidthOverride;
+
+  /// Optional wrap content override.
   final bool? wrapContentOverride;
+
+  /// Optional decoration override for the snackbar card.
   final BoxDecoration? decorationOverride;
+
+  /// Optional fixed height override.
   final double? fixedHeightOverride;
+
+  /// Optional fixed width override.
   final double? fixedWidthOverride;
 }
 
+/// Internal helper for displaying snackbars.
 class SnackToastSnackbar {
   const SnackToastSnackbar._();
 
+  /// Shows a snackbar using the provided [context].
   static void showWithContext(BuildContext context, SnackbarParams params) {
     ScaffoldMessenger.of(context)
       ..clearSnackBars()
       ..showSnackBar(_buildSnackBar(params));
   }
 
+  /// Shows a snackbar using the provided [scaffoldMessengerKey].
   static void showWithKey(
       GlobalKey<ScaffoldMessengerState> key, SnackbarParams params) {
     key.currentState
@@ -63,6 +105,7 @@ class SnackToastSnackbar {
       ..showSnackBar(_buildSnackBar(params));
   }
 
+  /// Builds a [SnackBar] widget from the provided parameters.
   static SnackBar buildSnackBar(SnackbarParams p) => _buildSnackBar(p);
 
   static SnackBar _buildSnackBar(SnackbarParams p) {

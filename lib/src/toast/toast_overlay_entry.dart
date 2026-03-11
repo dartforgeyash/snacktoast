@@ -10,7 +10,9 @@ import 'toast_controller.dart';
 ///
 /// Changed from [SingleTickerProviderStateMixin] to [TickerProviderStateMixin]
 /// because [ToastController] now manages three [AnimationController]s.
+/// A widget that hosts the toast's overlay entry and provides a [TickerProvider].
 class ToastOverlayHost extends StatefulWidget {
+  /// Creates a [ToastOverlayHost].
   const ToastOverlayHost({
     super.key,
     required this.overlayState,
@@ -39,29 +41,76 @@ class ToastOverlayHost extends StatefulWidget {
     this.fixedWidth,
   });
 
+  /// The [OverlayState] where the toast is inserted.
   final OverlayState overlayState;
+
+  /// The global configuration.
   final SnackToastConfig config;
+
+  /// The main message text.
   final String message;
+
+  /// Optional title text.
   final String? title;
+
+  /// The semantic type of the toast.
   final SnackToastType type;
+
+  /// The screen position.
   final SnackToastPosition position;
+
+  /// How long the toast should be displayed.
   final Duration? duration;
+
+  /// Optional custom icon widget.
   final Widget? customIcon;
+
+  /// Optional background color override.
   final Color? backgroundColor;
+
+  /// Optional foreground color override.
   final Color? foregroundColor;
+
+  /// Optional custom widget to replace the entire toast content.
   final Widget? customWidget;
+
+  /// Optional animation style override.
   final SnackToastAnimation? animationStyleOverride;
+
+  /// Optional visual style override.
   final dynamic visualStyleOverride;
+
+  /// Callback triggered when the toast is dismissed.
   final VoidCallback? onDismissed;
+
+  /// Optional title color override.
   final Color? titleColor;
+
+  /// Optional title text style override.
   final TextStyle? titleStyle;
+
+  /// Optional minimum width override.
   final double? minWidth;
+
+  /// Optional wrap content override.
   final bool? wrapContent;
+
+  /// Optional decoration override for the toast card.
   final BoxDecoration? decorationOverride;
+
+  /// Optional message color override.
   final Color? messageColor;
+
+  /// Optional message text style override.
   final TextStyle? messageStyle;
+
+  /// Optional fixed height override.
   final double? fixedHeight;
+
+  /// Optional fixed width override.
   final double? fixedWidth;
+
+  /// Callback triggered when the controller is ready.
   final void Function(ToastController controller) onReady;
 
   @override

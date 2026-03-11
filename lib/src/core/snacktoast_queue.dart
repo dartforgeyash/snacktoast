@@ -4,7 +4,9 @@ import 'dart:async';
 /// Prevents visual stacking and enforces max queue limit.
 ///
 /// Design: Simple FIFO queue with async coordination.
+/// Manages the sequential display of notifications.
 class SnackToastQueue {
+  /// Creates a [SnackToastQueue] with a [maxSize].
   SnackToastQueue({required int maxSize}) : _maxSize = maxSize;
 
   final int _maxSize;
@@ -14,6 +16,7 @@ class SnackToastQueue {
   /// Total entries currently pending or active.
   int get length => _queue.length;
 
+  /// Whether the queue has reached its maximum size.
   bool get isFull => _queue.length >= _maxSize;
 
   /// Adds a task to the queue.
@@ -53,6 +56,7 @@ class SnackToastQueue {
   }
 
   /// Clears all pending entries. Does NOT cancel the active entry.
+  /// Clears all pending entries from the queue.
   void clear() => _queue.clear();
 }
 

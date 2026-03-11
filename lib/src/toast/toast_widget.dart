@@ -22,7 +22,9 @@ const double _kCornerSweepY = 16.0;
 // ToastWidget
 // ─────────────────────────────────────────────────────────────────────────────
 
+/// A widget that renders a toast notification with animations and styles.
 class ToastWidget extends StatefulWidget {
+  /// Creates a [ToastWidget].
   const ToastWidget({
     super.key,
     required this.message,
@@ -51,29 +53,76 @@ class ToastWidget extends StatefulWidget {
     this.fixedWidth,
   });
 
+  /// The main message text.
   final String message;
+
+  /// Optional title text.
   final String? title;
+
+  /// The semantic type of the toast.
   final SnackToastType type;
+
+  /// The global configuration to use.
   final SnackToastConfig config;
+
+  /// The screen position of the toast.
   final SnackToastPosition position;
+
+  /// Animation for the entrance and exit of the toast.
   final Animation<double> entranceAnimation;
+
+  /// Animation for the icon micro-animation.
   final Animation<double> iconAnimation;
+
+  /// Animation for the progress bar.
   final Animation<double> progressAnimation;
+
+  /// The animation style to use.
   final SnackToastAnimation animationStyle;
+
+  /// Optional custom icon widget.
   final Widget? customIcon;
+
+  /// Optional background color override.
   final Color? backgroundColor;
+
+  /// Optional foreground color override.
   final Color? foregroundColor;
+
+  /// Optional custom widget to replace the entire toast content.
   final Widget? customWidget;
+
+  /// Optional visual style override.
   final dynamic visualStyleOverride;
+
+  /// Callback triggered when the toast is dismissed.
   final VoidCallback? onDismiss;
+
+  /// Optional title color override.
   final Color? titleColor;
+
+  /// Optional title text style override.
   final TextStyle? titleStyle;
+
+  /// Optional minimum width override.
   final double? minWidth;
+
+  /// Optional wrap content override.
   final bool? wrapContent;
+
+  /// Optional decoration override for the toast card.
   final BoxDecoration? decorationOverride;
+
+  /// Optional message color override.
   final Color? messageColor;
+
+  /// Optional message text style override.
   final TextStyle? messageStyle;
+
+  /// Optional fixed height override.
   final double? fixedHeight;
+
+  /// Optional fixed width override.
   final double? fixedWidth;
 
   @override

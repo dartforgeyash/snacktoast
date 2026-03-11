@@ -18,7 +18,9 @@ import 'toast_widget.dart';
 /// dismiss a no-op when `dismissOnTap: false` — requiring two swipes.
 ///
 /// [ToastWidget] now gates tap vs. swipe usage internally via config flags.
+/// Manages the full lifecycle of a single toast with coordinated animation phases.
 class ToastController {
+  /// Creates a [ToastController].
   ToastController({
     required this.overlayState,
     required this.config,
@@ -45,46 +47,98 @@ class ToastController {
     this.fixedWidth,
   });
 
+  /// The [OverlayState] where the toast is displayed.
   final OverlayState overlayState;
+
+  /// The global configuration.
   final SnackToastConfig config;
+
+  /// The main message text.
   final String message;
+
+  /// Optional title text.
   final String? title;
+
+  /// The semantic type of the toast.
   final SnackToastType type;
+
+  /// The screen position.
   final SnackToastPosition position;
+
+  /// How long the toast should be displayed.
   final Duration? duration;
+
+  /// Optional custom icon widget.
   final Widget? customIcon;
+
+  /// Optional background color override.
   final Color? backgroundColor;
+
+  /// Optional foreground color override.
   final Color? foregroundColor;
+
+  /// Optional custom widget to replace the entire toast content.
   final Widget? customWidget;
+
+  /// Optional animation style override.
   final SnackToastAnimation? animationStyleOverride;
+
+  /// Optional visual style override.
   final dynamic visualStyleOverride;
+
+  /// Callback triggered when the toast is dismissed.
   final VoidCallback? onDismissed;
+
+  /// Optional title color override.
   final Color? titleColor;
+
+  /// Optional title text style override.
   final TextStyle? titleStyle;
+
+  /// Optional minimum width override.
   final double? minWidth;
+
+  /// Optional wrap content override.
   final bool? wrapContent;
+
+  /// Optional decoration override for the toast card.
   final BoxDecoration? decorationOverride;
+
+  /// Optional message color override.
   final Color? messageColor;
+
+  /// Optional message text style override.
   final TextStyle? messageStyle;
+
+  /// Optional fixed height override.
   final double? fixedHeight;
+
+  /// Optional fixed width override.
   final double? fixedWidth;
+
+  /// Animation for the entrance and exit phase.
+  late Animation<double> entranceAnimation;
+
+  /// Animation for the icon micro-animation phase.
+  late Animation<double> iconAnimation;
+
+  /// Animation for the progress bar countdown phase.
+  late Animation<double> progressAnimation;
 
   late AnimationController _entranceController;
   late AnimationController _iconController;
   late AnimationController _progressController;
 
-  late Animation<double> entranceAnimation;
-  late Animation<double> iconAnimation;
-  late Animation<double> progressAnimation;
-
   bool _isDisposed = false;
   final Completer<void> _completer = Completer<void>();
 
+  /// Returns a future that completes when the toast is fully dismissed and disposed.
   Future<void> get future => _completer.future;
 
   SnackToastAnimation get _resolvedAnimation =>
       animationStyleOverride ?? config.resolvedAnimationForPosition(position);
 
+  /// Starts the entrance animation and timer.
   void show(TickerProvider vsync) {
     final animStyle = _resolvedAnimation;
     final holdDuration = duration ?? config.defaultDuration;
@@ -132,6 +186,7 @@ class ToastController {
     }
   }
 
+  /// Builds the toast widget tree.
   Widget buildWidget() {
     return Positioned.fill(
       child: Align(
@@ -187,6 +242,7 @@ class ToastController {
     };
   }
 
+  /// Triggers the exit animation.
   void dismiss() {
     if (_isDisposed) return;
     _progressController.stop();
@@ -196,6 +252,7 @@ class ToastController {
     });
   }
 
+  /// Disposes of all controllers and completes the future.
   void dispose() {
     if (_isDisposed) return;
     _isDisposed = true;

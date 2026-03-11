@@ -19,12 +19,17 @@ class SnackToastKit {
   static SnackToastQueue _queue =
       SnackToastQueue(maxSize: _config.maxQueueSize);
 
+  /// Global key for [NavigatorState] to enable context-free toasts.
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  /// Global key for [ScaffoldMessengerState] to enable context-free snackbars.
   static GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
       GlobalKey<ScaffoldMessengerState>();
 
   static final List<ToastController> _activeToasts = [];
 
+  /// Resets the global configuration, queue, and keys to their initial state.
+  /// Useful for testing.
   static void reset() {
     _config = const SnackToastConfig();
     _queue = SnackToastQueue(maxSize: _config.maxQueueSize);
@@ -33,13 +38,24 @@ class SnackToastKit {
     _activeToasts.clear();
   }
 
+  /// Configures the global settings for all notifications.
   static void configure(SnackToastConfig config) {
     _config = config;
     _queue = SnackToastQueue(maxSize: config.maxQueueSize);
   }
 
+  /// Returns the current global configuration.
   static SnackToastConfig get config => _config;
 
+  /// Shows a toast notification.
+  ///
+  /// [message] is the body text of the toast.
+  /// [context] is optional if [navigatorKey] is attached to [MaterialApp].
+  /// [title] is an optional header text.
+  /// [type] defines the semantic style (success, error, etc.).
+  /// [position] defaults to [SnackToastConfig.defaultPosition].
+  /// [duration] defaults to [SnackToastConfig.defaultDuration].
+  /// [queued] if true (default), wait for previous toasts to dismiss.
   static void toast(
     String message, {
     BuildContext? context,
@@ -171,6 +187,11 @@ class SnackToastKit {
     return completer.future;
   }
 
+  /// Shows a snackbar notification via [ScaffoldMessenger].
+  ///
+  /// [message] is the body text of the snackbar.
+  /// [context] is optional if [scaffoldMessengerKey] is attached to [MaterialApp].
+  /// [type] defines the semantic style.
   static void snackbar(
     String message, {
     BuildContext? context,
@@ -223,6 +244,7 @@ class SnackToastKit {
 
   // ── Convenience ──────────────────────────────────────────────────────────
 
+  /// Shows a success toast notification.
   static void success(String message,
           {BuildContext? context,
           String? title,
@@ -235,6 +257,7 @@ class SnackToastKit {
           visualStyle: visualStyle,
           animationStyle: animationStyle);
 
+  /// Shows an error toast notification.
   static void error(String message,
           {BuildContext? context,
           String? title,
@@ -247,6 +270,7 @@ class SnackToastKit {
           visualStyle: visualStyle,
           animationStyle: animationStyle);
 
+  /// Shows a warning toast notification.
   static void warning(String message,
           {BuildContext? context,
           String? title,
@@ -259,6 +283,7 @@ class SnackToastKit {
           visualStyle: visualStyle,
           animationStyle: animationStyle);
 
+  /// Shows an info toast notification.
   static void info(String message,
           {BuildContext? context,
           String? title,
@@ -271,23 +296,31 @@ class SnackToastKit {
           visualStyle: visualStyle,
           animationStyle: animationStyle);
 
+  /// Shows a success snackbar.
   static void snackbarSuccess(String message,
           {BuildContext? context, String? title}) =>
       snackbar(message,
           context: context, title: title, type: SnackToastType.success);
+
+  /// Shows an error snackbar.
   static void snackbarError(String message,
           {BuildContext? context, String? title}) =>
       snackbar(message,
           context: context, title: title, type: SnackToastType.error);
+
+  /// Shows a warning snackbar.
   static void snackbarWarning(String message,
           {BuildContext? context, String? title}) =>
       snackbar(message,
           context: context, title: title, type: SnackToastType.warning);
+
+  /// Shows an info snackbar.
   static void snackbarInfo(String message,
           {BuildContext? context, String? title}) =>
       snackbar(message,
           context: context, title: title, type: SnackToastType.info);
 
+  /// Dismisses all visible toasts and clears the pending queue.
   static void dismissAll() {
     for (final controller in List<ToastController>.from(_activeToasts)) {
       controller.dismiss();
