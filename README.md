@@ -1,3 +1,6 @@
+## 💰 You can help me by Donating
+[![BuyMeACoffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/forgeofyash) [![Ko-Fi](https://img.shields.io/badge/Ko--fi-F16061?style=for-the-badge&logo=ko-fi&logoColor=white)](https://ko-fi.com/forgeofyash) 
+
 # SnackToast
 
 A modern, production-grade Flutter notification library providing fully animated toasts and snackbars with **8 motion styles**, **5 visual styles**, swipe-to-dismiss, icon micro-animations, and a progress bar countdown — all through a clean, developer-friendly API.
