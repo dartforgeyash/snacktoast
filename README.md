@@ -71,7 +71,7 @@ Add to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  snacktoast: ^0.0.3
+  snacktoast: ^0.0.5
 ```
 
 Then run:

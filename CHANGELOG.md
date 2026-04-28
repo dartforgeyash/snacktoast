@@ -7,6 +7,20 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ---
 
+## [0.0.5] — 2026-04-28
+
+### Fixed
+- **Snackbar text underline** — Removed unwanted underline decoration appearing on title and message text.
+
+---
+
+## [0.0.4] — 2026-04-28
+
+### Fixed
+- Minor bug fixes and improvements.
+
+---
+
 ## [0.0.3] — 2026-04-28
 
 ### Fixed
