@@ -237,6 +237,7 @@ class _SnackBarContent extends StatelessWidget {
                               fontWeight: FontWeight.w700,
                               fontSize: 14,
                               letterSpacing: 0.1,
+                              decoration: TextDecoration.none, // ← added
                             ),
                           ),
                           const SizedBox(height: 3),
@@ -249,11 +250,11 @@ class _SnackBarContent extends StatelessWidget {
                                   const TextStyle())
                               .copyWith(
                             color: params.messageColorOverride ??
-                                config.messageColor ??
                                 fg.withValues(
                                     alpha: params.title != null ? 0.88 : 1.0),
                             fontSize: 13.5,
                             height: 1.35,
+                            decoration: TextDecoration.none, // ← added
                           ),
                         ),
                       ],
